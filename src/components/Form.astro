@@ -1,0 +1,474 @@
+---
+---
+
+<div class="card p-8 h-full overflow-y-auto animate-slide-in">
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-primary mb-2">Información Personal</h2>
+    <p class="text-text-light text-sm">Completa tu información para generar tu currículum profesional</p>
+  </div>
+  
+  <form id="resume-form" class="space-y-8">
+    <!-- Datos Personales -->
+    <section class="space-y-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-text">Datos Personales</h3>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="relative">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="input-field peer"
+            placeholder=" "
+          />
+          <label for="name" class="input-label">
+            Nombre Completo
+          </label>
+        </div>
+        
+        <div class="relative">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="input-field peer"
+            placeholder=" "
+          />
+          <label for="email" class="input-label">
+            Correo Electrónico
+          </label>
+        </div>
+        
+        <div class="relative">
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="input-field peer"
+            placeholder=" "
+          />
+          <label for="phone" class="input-label">
+            Teléfono
+          </label>
+        </div>
+        
+        <div class="relative">
+          <input
+            type="text"
+            id="location"
+            name="location"
+            class="input-field peer"
+            placeholder=" "
+          />
+          <label for="location" class="input-label">
+            Ubicación
+          </label>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Perfil Profesional -->
+    <section>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-text">Perfil Profesional</h3>
+      </div>
+      <div class="relative">
+        <textarea
+          id="profile"
+          name="profile"
+          rows="4"
+          class="input-field peer resize-none"
+          placeholder=" "
+        ></textarea>
+        <label for="profile" class="input-label textarea-label">
+          Describe tu perfil profesional y objetivos
+        </label>
+      </div>
+    </section>
+    
+    <!-- Experiencia Laboral -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-text">Experiencia Laboral</h3>
+        </div>
+        <button
+          type="button"
+          id="add-experience"
+          class="text-primary hover:text-primary-600 text-sm font-medium flex items-center gap-1"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+          </svg>
+          Añadir
+        </button>
+      </div>
+      
+      <div id="experience-container" class="space-y-4">
+        <div class="experience-item bg-gray-50 rounded-lg p-6 border-2 border-transparent hover:border-primary-100 transition-all">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              name="job-title"
+              class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              placeholder="Título del puesto"
+            />
+            <input
+              type="text"
+              name="company"
+              class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              placeholder="Empresa"
+            />
+            <input
+              type="text"
+              name="period"
+              class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              placeholder="Período (ej: Ene 2020 - Dic 2023)"
+            />
+            <input
+              type="text"
+              name="location"
+              class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              placeholder="Ubicación"
+            />
+          </div>
+          <textarea
+            name="description"
+            rows="3"
+            class="w-full mt-4 px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary resize-none"
+            placeholder="Describe tus responsabilidades y logros principales..."
+          ></textarea>
+          <button
+            type="button"
+            class="remove-experience mt-3 text-red-500 hover:text-red-600 text-sm font-medium hidden"
+          >
+            Eliminar experiencia
+          </button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Educación -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-text">Educación</h3>
+        </div>
+        <button
+          type="button"
+          id="add-education"
+          class="text-primary hover:text-primary-600 text-sm font-medium flex items-center gap-1"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+          </svg>
+          Añadir
+        </button>
+      </div>
+      
+      <div id="education-container" class="space-y-4">
+        <div class="education-item bg-gray-50 rounded-lg p-6 border-2 border-transparent hover:border-primary-100 transition-all">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              name="degree"
+              class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              placeholder="Título obtenido"
+            />
+            <input
+              type="text"
+              name="institution"
+              class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              placeholder="Institución"
+            />
+            <input
+              type="text"
+              name="edu-period"
+              class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              placeholder="Período"
+            />
+          </div>
+          <button
+            type="button"
+            class="remove-education mt-3 text-red-500 hover:text-red-600 text-sm font-medium hidden"
+          >
+            Eliminar educación
+          </button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Habilidades -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-text">Habilidades</h3>
+        </div>
+      </div>
+      
+      <div id="skills-container" class="space-y-3">
+        <div class="skill-item flex gap-2">
+          <input
+            type="text"
+            name="skill"
+            class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+            placeholder="Añade una habilidad"
+          />
+          <button
+            type="button"
+            class="remove-skill px-4 py-3 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 transition-all opacity-0"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <button
+        type="button"
+        id="add-skill"
+        class="mt-4 text-primary hover:text-primary-600 text-sm font-medium flex items-center gap-1"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+        </svg>
+        Añadir habilidad
+      </button>
+    </section>
+  </form>
+</div>
+
+<style>
+  .input-field {
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all;
+  }
+  
+  .input-label {
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-text-light bg-white px-1 transition-all duration-200 pointer-events-none;
+  }
+  
+  .textarea-label {
+    @apply top-6 -translate-y-0;
+  }
+  
+  .input-field:focus ~ .input-label,
+  .input-field:not(:placeholder-shown) ~ .input-label {
+    @apply top-0 text-xs text-primary;
+  }
+  
+  .input-field:focus ~ .textarea-label,
+  .input-field:not(:placeholder-shown) ~ .textarea-label {
+    @apply top-0 text-xs text-primary translate-y-0;
+  }
+</style>
+
+<script>
+  // Funciones mejoradas para añadir/eliminar campos
+  document.getElementById('add-experience')?.addEventListener('click', () => {
+    const container = document.getElementById('experience-container');
+    const newItem = document.querySelector('.experience-item')?.cloneNode(true) as HTMLElement;
+    if (newItem && container) {
+      newItem.querySelectorAll('input, textarea').forEach((input: any) => {
+        input.value = '';
+      });
+      const removeBtn = newItem.querySelector('.remove-experience');
+      if (removeBtn) {
+        removeBtn.classList.remove('hidden');
+      }
+      newItem.style.opacity = '0';
+      container.appendChild(newItem);
+      setTimeout(() => {
+        newItem.style.opacity = '1';
+        newItem.style.transition = 'opacity 0.3s ease-in';
+      }, 10);
+    }
+  });
+  
+  document.getElementById('add-education')?.addEventListener('click', () => {
+    const container = document.getElementById('education-container');
+    const newItem = document.querySelector('.education-item')?.cloneNode(true) as HTMLElement;
+    if (newItem && container) {
+      newItem.querySelectorAll('input').forEach((input: any) => {
+        input.value = '';
+      });
+      const removeBtn = newItem.querySelector('.remove-education');
+      if (removeBtn) {
+        removeBtn.classList.remove('hidden');
+      }
+      newItem.style.opacity = '0';
+      container.appendChild(newItem);
+      setTimeout(() => {
+        newItem.style.opacity = '1';
+        newItem.style.transition = 'opacity 0.3s ease-in';
+      }, 10);
+    }
+  });
+  
+  // Delegación de eventos para eliminar experiencia y educación
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('remove-experience')) {
+      const item = target.closest('.experience-item');
+      if (item) {
+        item.style.opacity = '0';
+        setTimeout(() => item.remove(), 300);
+      }
+    }
+    if (target.classList.contains('remove-education')) {
+      const item = target.closest('.education-item');
+      if (item) {
+        item.style.opacity = '0';
+        setTimeout(() => item.remove(), 300);
+      }
+    }
+  });
+  
+  // Mejorar la gestión de habilidades
+  let skillCount = 1;
+  
+  document.getElementById('add-skill')?.addEventListener('click', () => {
+    const container = document.getElementById('skills-container');
+    const newSkill = document.createElement('div');
+    newSkill.className = 'skill-item flex gap-2';
+    newSkill.innerHTML = `
+      <input
+        type="text"
+        name="skill"
+        class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+        placeholder="Añade una habilidad"
+      />
+      <button
+        type="button"
+        class="remove-skill px-4 py-3 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 transition-all"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    `;
+    newSkill.style.opacity = '0';
+    container?.appendChild(newSkill);
+    setTimeout(() => {
+      newSkill.style.opacity = '1';
+      newSkill.style.transition = 'opacity 0.3s ease-in';
+    }, 10);
+    skillCount++;
+    updateSkillButtons();
+  });
+  
+  document.getElementById('skills-container')?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('.remove-skill')) {
+      const item = (e.target as HTMLElement).closest('.skill-item');
+      if (item) {
+        item.style.opacity = '0';
+        setTimeout(() => {
+          item.remove();
+          skillCount--;
+          updateSkillButtons();
+        }, 300);
+      }
+    }
+  });
+  
+  function updateSkillButtons() {
+    const skills = document.querySelectorAll('.skill-item');
+    skills.forEach((skill, index) => {
+      const removeBtn = skill.querySelector('.remove-skill') as HTMLElement;
+      if (removeBtn) {
+        removeBtn.style.opacity = skills.length > 1 ? '1' : '0';
+        removeBtn.style.pointerEvents = skills.length > 1 ? 'auto' : 'none';
+      }
+    });
+  }
+  
+  // Actualización en tiempo real con debounce
+  let debounceTimer: any;
+  const form = document.getElementById('resume-form');
+  
+  form?.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      const event = new CustomEvent('resume-update', { 
+        detail: collectFormData() 
+      });
+      window.dispatchEvent(event);
+    }, 300);
+  });
+  
+  function collectFormData() {
+    const formData: any = {
+      name: (document.getElementById('name') as HTMLInputElement)?.value || '',
+      email: (document.getElementById('email') as HTMLInputElement)?.value || '',
+      phone: (document.getElementById('phone') as HTMLInputElement)?.value || '',
+      location: (document.getElementById('location') as HTMLInputElement)?.value || '',
+      profile: (document.getElementById('profile') as HTMLTextAreaElement)?.value || '',
+      experience: [],
+      education: [],
+      skills: []
+    };
+    
+    document.querySelectorAll('.experience-item').forEach(item => {
+      const exp = {
+        title: (item.querySelector('[name="job-title"]') as HTMLInputElement)?.value || '',
+        company: (item.querySelector('[name="company"]') as HTMLInputElement)?.value || '',
+        period: (item.querySelector('[name="period"]') as HTMLInputElement)?.value || '',
+        location: (item.querySelector('[name="location"]') as HTMLInputElement)?.value || '',
+        description: (item.querySelector('[name="description"]') as HTMLTextAreaElement)?.value || ''
+      };
+      if (exp.title || exp.company) {
+        formData.experience.push(exp);
+      }
+    });
+    
+    document.querySelectorAll('.education-item').forEach(item => {
+      const edu = {
+        degree: (item.querySelector('[name="degree"]') as HTMLInputElement)?.value || '',
+        institution: (item.querySelector('[name="institution"]') as HTMLInputElement)?.value || '',
+        period: (item.querySelector('[name="edu-period"]') as HTMLInputElement)?.value || ''
+      };
+      if (edu.degree || edu.institution) {
+        formData.education.push(edu);
+      }
+    });
+    
+    document.querySelectorAll('[name="skill"]').forEach((input: any) => {
+      if (input.value.trim()) {
+        formData.skills.push(input.value.trim());
+      }
+    });
+    
+    return formData;
+  }
+  
+  // Inicializar
+  updateSkillButtons();
+</script>

@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply transition-colors duration-200;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-text antialiased;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+  }
+}
+
+@layer components {
+  .resume-template {
+    @apply bg-white shadow-hard rounded-lg;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-white rounded-lg font-medium
+           hover:bg-primary-600 transform hover:-translate-y-0.5
+           transition-all duration-200 shadow-soft hover:shadow-medium;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 bg-white text-primary border-2 border-primary rounded-lg font-medium
+           hover:bg-primary hover:text-white transform hover:-translate-y-0.5
+           transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-soft hover:shadow-medium
+           transition-all duration-300;
+  }
+  
+  @media print {
+    .resume-template {
+      box-shadow: none;
+      margin: 0;
+    }
+  }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-text-light rounded-full hover:bg-primary;
+}
+
+/* Animaciones suaves para elementos */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

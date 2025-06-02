@@ -1,11 +1,54 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import MainLayout from '../layouts/MainLayout.astro';
+import Form from '../components/Form.astro';
+import Preview from '../components/Preview.astro';
+import TemplateSelector from '../components/TemplateSelector.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout title="CurriculumLab - Generador de Currículums Profesional">
+  <main class="min-h-screen bg-gray-50">
+    <header class="bg-white shadow-soft border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex items-center gap-4">
+          <img src="/CurriculumLab/logo.png" alt="CurriculumLab" class="w-12 h-12 rounded-full" />
+          <div>
+            <h1 class="text-3xl font-bold text-primary">CurriculumLab</h1>
+            <p class="text-text-light text-sm mt-1">Crea tu currículum profesional de forma rápida y elegante</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Panel de formulario -->
+        <div class="order-2 lg:order-1">
+          <Form />
+        </div>
+        
+        <!-- Panel de vista previa -->
+        <div class="order-1 lg:order-2 space-y-4">
+          <TemplateSelector />
+          <Preview />
+        </div>
+      </div>
+    </div>
+    
+    <footer class="bg-primary text-white mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="text-center">
+          <div class="flex items-center justify-center gap-2 mb-4">
+            <img src="/CurriculumLab/logo.png" alt="CurriculumLab" class="w-8 h-8 rounded-full opacity-90" />
+            <span class="text-xl font-semibold">CurriculumLab</span>
+          </div>
+          <p class="text-primary-100 text-sm">
+            © 2025 CurriculumLab. Todos tus datos se procesan localmente y no se almacenan en ningún servidor.
+          </p>
+          <p class="text-primary-200 text-xs mt-2">
+            Desarrollado con ❤️ por Warc0s
+          </p>
+        </div>
+      </div>
+    </footer>
+  </main>
+</MainLayout>

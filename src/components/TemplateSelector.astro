@@ -1,0 +1,82 @@
+---
+---
+
+<div class="card p-6 mb-6 animate-fade-in">
+  <h3 class="text-lg font-semibold text-text mb-4">Selecciona una plantilla</h3>
+  <div class="grid grid-cols-3 gap-4">
+    <button
+      class="template-btn group relative overflow-hidden rounded-xl border-3 border-primary bg-primary-50 p-4 transition-all hover:scale-105 active"
+      data-template="classic"
+    >
+      <div class="relative z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <div class="text-sm font-semibold text-primary">Clásica</div>
+        <div class="text-xs text-primary-600 opacity-80">Tradicional y formal</div>
+      </div>
+      <div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity"></div>
+    </button>
+    
+    <button
+      class="template-btn group relative overflow-hidden rounded-xl border-3 border-gray-200 bg-white p-4 transition-all hover:scale-105 hover:border-primary-200"
+      data-template="modern"
+    >
+      <div class="relative z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-text-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+        </svg>
+        <div class="text-sm font-semibold text-text">Moderna</div>
+        <div class="text-xs text-text-light">Minimalista y limpia</div>
+      </div>
+      <div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity"></div>
+    </button>
+    
+    <button
+      class="template-btn group relative overflow-hidden rounded-xl border-3 border-gray-200 bg-white p-4 transition-all hover:scale-105 hover:border-primary-200"
+      data-template="executive"
+    >
+      <div class="relative z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-text-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+        <div class="text-sm font-semibold text-text">Ejecutiva</div>
+        <div class="text-xs text-text-light">Profesional premium</div>
+      </div>
+      <div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity"></div>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.template-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const target = e.currentTarget as HTMLElement;
+      const template = target.dataset.template;
+      
+      document.querySelectorAll('.template-btn').forEach(b => {
+        b.classList.remove('active', 'border-primary', 'bg-primary-50');
+        b.classList.add('border-gray-200', 'bg-white');
+        b.querySelectorAll('svg, div').forEach(el => {
+          el.classList.remove('text-primary', 'text-primary-600');
+          el.classList.add('text-text-light', 'text-text');
+        });
+      });
+      
+      target.classList.add('active', 'border-primary', 'bg-primary-50');
+      target.classList.remove('border-gray-200', 'bg-white');
+      target.querySelectorAll('svg').forEach(el => {
+        el.classList.remove('text-text-light');
+        el.classList.add('text-primary');
+      });
+      target.querySelectorAll('div').forEach(el => {
+        el.classList.remove('text-text', 'text-text-light');
+        el.classList.add('text-primary', 'text-primary-600');
+      });
+      
+      window.dispatchEvent(new CustomEvent('template-change', { 
+        detail: { template } 
+      }));
+    });
+  });
+</script>

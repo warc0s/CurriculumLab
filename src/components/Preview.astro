@@ -1,0 +1,317 @@
+---
+---
+
+<div class="card p-6 max-h-[600px] overflow-hidden flex flex-col">
+  <div class="mb-6 flex justify-between items-center flex-shrink-0">
+    <h2 class="text-2xl font-bold text-text">Vista Previa</h2>
+    <button
+      id="download-pdf"
+      class="btn-primary flex items-center gap-2"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+      Descargar PDF
+    </button>
+  </div>
+  
+  <div class="flex-1 overflow-y-auto">
+    <div id="resume-preview" class="resume-template transform scale-[0.6] origin-top">
+      <!-- El contenido se generará dinámicamente -->
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentTemplate = 'classic';
+  let currentData: any = {};
+  
+  // Escuchar cambios en el formulario
+  window.addEventListener('resume-update', (e: any) => {
+    currentData = e.detail;
+    updatePreview();
+  });
+  
+  // Escuchar cambios de plantilla
+  window.addEventListener('template-change', (e: any) => {
+    currentTemplate = e.detail.template;
+    updatePreview();
+  });
+  
+  function updatePreview() {
+    const preview = document.getElementById('resume-preview');
+    if (!preview) return;
+    
+    switch(currentTemplate) {
+      case 'classic':
+        preview.innerHTML = generateClassicTemplate(currentData);
+        break;
+      case 'modern':
+        preview.innerHTML = generateModernTemplate(currentData);
+        break;
+      case 'executive':
+        preview.innerHTML = generateExecutiveTemplate(currentData);
+        break;
+    }
+  }
+  
+  function generateClassicTemplate(data: any) {
+    return `
+      <div class="p-12 font-sans bg-white">
+        <div class="border-b-2 border-primary-200 pb-6 mb-6">
+          <h1 class="text-3xl font-bold text-primary mb-2">${data.name || 'Tu Nombre'}</h1>
+          <div class="text-text-light flex items-center gap-4">
+            ${data.email ? `<span class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+              </svg>
+              ${data.email}
+            </span>` : ''}
+            ${data.phone ? `<span class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+              </svg>
+              ${data.phone}
+            </span>` : ''}
+            ${data.location ? `<span class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+              </svg>
+              ${data.location}
+            </span>` : ''}
+          </div>
+        </div>
+        
+        ${data.profile ? `
+          <div class="mb-8">
+            <h2 class="text-xl font-bold text-primary mb-3">Perfil Profesional</h2>
+            <p class="text-text leading-relaxed">${data.profile}</p>
+          </div>
+        ` : ''}
+        
+        ${data.experience?.length > 0 ? `
+          <div class="mb-8">
+            <h2 class="text-xl font-bold text-primary mb-4">Experiencia Laboral</h2>
+            ${data.experience.map((exp: any) => `
+              <div class="mb-6">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="font-semibold text-text">${exp.title}</h3>
+                  <span class="text-sm text-text-light">${exp.period}</span>
+                </div>
+                <p class="text-primary-600 font-medium mb-2">${exp.company} ${exp.location ? `• ${exp.location}` : ''}</p>
+                <p class="text-text leading-relaxed">${exp.description}</p>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+        
+        ${data.education?.length > 0 ? `
+          <div class="mb-8">
+            <h2 class="text-xl font-bold text-primary mb-4">Educación</h2>
+            ${data.education.map((edu: any) => `
+              <div class="mb-4">
+                <div class="flex justify-between items-start">
+                  <h3 class="font-semibold text-text">${edu.degree}</h3>
+                  <span class="text-sm text-text-light">${edu.period}</span>
+                </div>
+                <p class="text-primary-600">${edu.institution}</p>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+        
+        ${data.skills?.length > 0 ? `
+          <div>
+            <h2 class="text-xl font-bold text-primary mb-4">Habilidades</h2>
+            <div class="flex flex-wrap gap-2">
+              ${data.skills.map((skill: string) => `
+                <span class="px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-medium">${skill}</span>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
+  
+  function generateModernTemplate(data: any) {
+    return `
+      <div class="p-12 font-sans bg-white">
+        <div class="text-center mb-10">
+          <h1 class="text-4xl font-light text-text mb-3">${data.name || 'Tu Nombre'}</h1>
+          <div class="text-text-light text-sm flex justify-center gap-3 flex-wrap">
+            ${data.email || ''} ${data.email && data.phone ? '•' : ''} ${data.phone || ''} ${data.location ? `• ${data.location}` : ''}
+          </div>
+        </div>
+        
+        ${data.profile ? `
+          <div class="mb-10 text-center max-w-3xl mx-auto">
+            <p class="text-text-light leading-relaxed">${data.profile}</p>
+          </div>
+        ` : ''}
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="md:col-span-2">
+            ${data.experience?.length > 0 ? `
+              <div class="mb-8">
+                <h2 class="text-sm font-bold text-primary uppercase tracking-wider mb-6">Experiencia</h2>
+                ${data.experience.map((exp: any) => `
+                  <div class="mb-8 relative pl-6 before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:bg-primary before:rounded-full">
+                    <h3 class="text-lg font-medium text-text">${exp.title}</h3>
+                    <p class="text-sm text-primary-600 mb-2">${exp.company} • ${exp.period}</p>
+                    <p class="text-text-light text-sm leading-relaxed">${exp.description}</p>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+          
+          <div>
+            ${data.education?.length > 0 ? `
+              <div class="mb-8">
+                <h2 class="text-sm font-bold text-primary uppercase tracking-wider mb-6">Educación</h2>
+                ${data.education.map((edu: any) => `
+                  <div class="mb-6">
+                    <h3 class="text-sm font-medium text-text">${edu.degree}</h3>
+                    <p class="text-xs text-primary-600">${edu.institution}</p>
+                    <p class="text-xs text-text-light">${edu.period}</p>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+            
+            ${data.skills?.length > 0 ? `
+              <div>
+                <h2 class="text-sm font-bold text-primary uppercase tracking-wider mb-6">Habilidades</h2>
+                <div class="space-y-2">
+                  ${data.skills.map((skill: string) => `
+                    <div class="flex items-center gap-2">
+                      <div class="w-2 h-2 bg-primary rounded-full"></div>
+                      <span class="text-sm text-text">${skill}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  function generateExecutiveTemplate(data: any) {
+    return `
+      <div class="flex h-full bg-white">
+        <div class="w-1/3 bg-primary text-white p-8">
+          <h1 class="text-2xl font-bold mb-8">${data.name || 'Tu Nombre'}</h1>
+          
+          <div class="mb-8">
+            <h2 class="text-sm font-bold uppercase tracking-wider mb-4 text-primary-100">Contacto</h2>
+            <div class="space-y-3 text-sm">
+              ${data.email ? `<div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-primary-200" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                <span>${data.email}</span>
+              </div>` : ''}
+              ${data.phone ? `<div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-primary-200" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+                <span>${data.phone}</span>
+              </div>` : ''}
+              ${data.location ? `<div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-primary-200" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                </svg>
+                <span>${data.location}</span>
+              </div>` : ''}
+            </div>
+          </div>
+          
+          ${data.skills?.length > 0 ? `
+            <div class="mb-8">
+              <h2 class="text-sm font-bold uppercase tracking-wider mb-4 text-primary-100">Competencias</h2>
+              <div class="space-y-3">
+                ${data.skills.map((skill: string) => `
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-primary-200 rounded-full"></div>
+                    <span class="text-sm">${skill}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+          
+          ${data.education?.length > 0 ? `
+            <div>
+              <h2 class="text-sm font-bold uppercase tracking-wider mb-4 text-primary-100">Formación</h2>
+              ${data.education.map((edu: any) => `
+                <div class="mb-6">
+                  <h3 class="text-sm font-semibold">${edu.degree}</h3>
+                  <p class="text-xs text-primary-200">${edu.institution}</p>
+                  <p class="text-xs text-primary-300">${edu.period}</p>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>
+        
+        <div class="flex-1 p-8">
+          ${data.profile ? `
+            <div class="mb-8">
+              <h2 class="text-lg font-bold text-primary mb-4">Perfil Profesional</h2>
+              <p class="text-text leading-relaxed">${data.profile}</p>
+            </div>
+          ` : ''}
+          
+          ${data.experience?.length > 0 ? `
+            <div>
+              <h2 class="text-lg font-bold text-primary mb-6">Experiencia Profesional</h2>
+              ${data.experience.map((exp: any) => `
+                <div class="mb-8">
+                  <div class="flex justify-between items-start mb-3">
+                    <div>
+                      <h3 class="font-semibold text-text">${exp.title}</h3>
+                      <p class="text-sm text-primary-600">${exp.company}</p>
+                    </div>
+                    <span class="text-sm text-text-light">${exp.period}</span>
+                  </div>
+                  <p class="text-text-light text-sm leading-relaxed">${exp.description}</p>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }
+  
+  // Función para descargar PDF
+  document.getElementById('download-pdf')?.addEventListener('click', () => {
+    const element = document.getElementById('resume-preview');
+    if (!element) return;
+    
+    // Temporalmente quitar el scale para el PDF
+    element.style.transform = 'scale(1)';
+    
+    const opt = {
+      margin: 0,
+      filename: 'curriculum.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    // @ts-ignore
+    html2pdf().set(opt).from(element).save().then(() => {
+      // Restaurar el scale después de generar el PDF
+      element.style.transform = 'scale(0.6)';
+    });
+  });
+  
+  // Inicializar con datos vacíos
+  updatePreview();
+</script>
